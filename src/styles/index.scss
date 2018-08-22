@@ -1,0 +1,28 @@
+body {
+  color: #555;
+  background-color: #fafafa;
+}
+h1 {
+  color: #555;
+  text-align: center;
+}
+p {
+  font-size: 20px;
+  text-align: center;
+}
+
+svg {
+  border: 1px solid rgb(239, 237, 245);
+}
+.chart-caineront {
+  width: 100vw;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.county {
+  cursor: pointer;
+  &:hover {
+    fill: rgba(244, 66, 66, 0.5);
+  }
+}
