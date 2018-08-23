@@ -94,17 +94,31 @@ function drawMap() {
     .attr('class', 'county')
     .attr('data-fips', d => d.id)
     .attr('data-education', d => {
-      return education.find(el => el.fips === d.id);
+      return education.find(el => el.fips === d.id).bachelorsOrHigher;
     })
     .attr('fill', function (d) {
       return color(education.find(el => el.fips === d.id).bachelorsOrHigher || 0);
     })
     .attr('d', path)
-    .append('title')
-    .text(d => {
-      const item = education.find(el => el.fips === d.id);
-      return item ? `${item.area_name}, ${item.state} - ${item.bachelorsOrHigher}%` : '';
-    });
+    .on('mouseover', handleMouseOver)
+    .on('mouseout', handleMouseOut);
+}
+
+function handleMouseOver(d) {
+  const item = education.find(el => el.fips === d.id);
+  d3.select('#tooltip')
+    .style('top', `${d3.event.pageY + 10}px`)
+    .style('left', `${d3.event.pageX + 10}px`)
+    .text(item ? `${item.area_name}, ${item.state} - ${item.bachelorsOrHigher}%` : '')
+    .attr('data-education', item ? item.bachelorsOrHigher : null)
+    .style('opacity', 0.7) // just to pass ffc tests
+    .style('visibility', 'visible');
+}
+
+function handleMouseOut() {
+  d3.select('#tooltip')
+    .style('opacity', 0) // just to pass ffc tests
+    .style('visibility', 'hidden');
 }
 
 /*

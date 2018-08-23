@@ -26,3 +26,12 @@ svg {
     fill: rgba(244, 66, 66, 0.5);
   }
 }
+
+.data-tooltip {
+  background: rgba(0,0,0, 0.9);
+  border-radius: 4px;
+  color: white;
+  padding: 1em;
+  font-size: 12px;
+  position: absolute;
+}
